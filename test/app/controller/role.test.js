@@ -29,6 +29,20 @@ describe('test/app/controller/role.test.js', () => {
     id = body.data._id
   })
 
+  it('测试 role 修改', async () => {
+    app.mockCsrf()
+
+    return app.httpRequest()
+      .put('/api/role/' + id)
+      .send({
+        name: 'update' + new Date().getTime(),
+        access: 'update',
+      })
+      .expect(200)
+      .expect(/请求成功/)
+
+  })
+
   it('测试 role 获得', async () => {
     app.mockCsrf()
 
@@ -53,6 +67,7 @@ describe('test/app/controller/role.test.js', () => {
     // console.log(body);
     assert(res.status === 200);
     assert(body.data.list.length === 1)
+    assert(body.data.list[0].access === 'update')
   })
 
 
