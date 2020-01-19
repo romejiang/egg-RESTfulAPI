@@ -1,0 +1,133 @@
+{{#if script}}
+
+const Controller = require('egg').Controller
+
+class {{ properCase name }}Controller extends Controller {
+  constructor(ctx) {
+    super(ctx)
+
+    this.{{ properCase name }}CreateTransfer = {
+      name: {type: 'string', required: true, allowEmpty: false},
+      url: {type: 'string', required: true, allowEmpty: false},
+      address: {type: 'string', required: true, allowEmpty: false},
+      logo: {type: 'string', required: false, allowEmpty: true}
+    }
+
+    this.{{ properCase name }}UpdateTransfer = {
+      name: {type: 'string', required: true, allowEmpty: false},
+      url: {type: 'string', required: true, allowEmpty: false},
+      address: {type: 'string', required: true, allowEmpty: false},
+      logo: {type: 'string', required: false, allowEmpty: true}
+    }
+  }
+
+  // 创建用户
+  async create() {
+    const { ctx } = this
+    // 校验参数
+    ctx.validate(this.{{ properCase name }}CreateTransfer)
+    // 组装参数
+    const payload = ctx.request.body || {}
+    const res = await ctx.model.{{ properCase name }}.create(payload)
+    // 设置响应内容和响应状态码
+    ctx.helper.success({ctx, res})
+  }
+
+  // 删除单个用户
+  async destroy() {
+    const { ctx } = this
+    // 校验参数
+    const { id } = ctx.params
+    const object = await ctx.model.{{ properCase name }}.findById(id)
+    if (!object) {
+      ctx.throw(404, '{{ properCase name }} not found')
+    }
+    await ctx.model.{{ properCase name }}.findByIdAndRemove(id)
+    // 设置响应内容和响应状态码
+    ctx.helper.success({ctx})
+  }
+
+  // 修改用户
+  async update() {
+    const { ctx } = this
+    // 校验参数
+    ctx.validate(this.{{ properCase name }}UpdateTransfer)
+    // 组装参数
+    const { id } = ctx.params
+    const payload = ctx.request.body || {}
+    const object = await ctx.model.{{ properCase name }}.findById(id)
+    if (!object) {
+      ctx.throw(404, '{{ properCase name }} not found')
+    }
+    const result = await ctx.model.{{ properCase name }}.findByIdAndUpdate(id, payload)
+    // 设置响应内容和响应状态码
+    ctx.helper.success({ctx, res: result})
+  }
+
+  // 获取单个用户
+  async show() {
+    const { ctx } = this
+    // 组装参数
+    const { id } = ctx.params
+    const object = await ctx.model.{{ properCase name }}.findById(id)
+    if (!object) {
+      this.ctx.throw(404, '{{ properCase name }} not found')
+    }
+    // 设置响应内容和响应状态码
+    ctx.helper.success({ctx, res: object})
+  }
+
+  // 获取所有用户(分页/模糊)
+  async index() {
+    const { ctx } = this
+    // 组装参数
+    const payload = ctx.query
+    const { currentPage, pageSize, isPaging, search } = payload
+    let res = []
+    let count = 0
+    let skip = ((Number(currentPage)) - 1) * Number(pageSize || 10)
+    if(isPaging) {
+      if(search) {
+        res = await ctx.model.{{ properCase name }}.find({mobile: { $regex: search } }).skip(skip).limit(Number(pageSize)).sort({ createdAt: -1 }).exec()
+        count = res.length
+      } else {
+        res = await ctx.model.{{ properCase name }}.find({}).skip(skip).limit(Number(pageSize)).sort({ createdAt: -1 }).exec()
+        count = await ctx.model.{{ properCase name }}.countDocuments({}).exec()
+      }
+    } else {
+      if(search) {
+        res = await ctx.model.{{ properCase name }}.find({mobile: { $regex: search } }).sort({ createdAt: -1 }).exec()
+        count = res.length
+      } else {
+        res = await ctx.model.{{ properCase name }}.find({}).sort({ createdAt: -1 }).exec()
+        count = await ctx.model.{{ properCase name }}.countDocuments({}).exec()
+      }
+    }
+    // 整理数据源 -> Ant Design Pro
+    let data = res.map((e,i) => {
+      const jsonObject = Object.assign({}, e._doc)
+      jsonObject.key = i
+      jsonObject.createdAt = ctx.helper.formatTime(e.createdAt)
+      return jsonObject
+    })
+    
+    const jsonData = { count: count, list: data, pageSize: Number(pageSize), currentPage: Number(currentPage) }
+    // 设置响应内容和响应状态码
+    ctx.helper.success({ctx, res: jsonData})
+  }
+
+  // 删除所选用户(条件id[])
+  async removes() {
+    const { ctx } = this
+    // 组装参数
+    const result = await ctx.model.{{ properCase name }}.remove({})
+    // 设置响应内容和响应状态码
+    ctx.helper.success({ctx, res: result.result})
+  }
+
+}
+
+
+module.exports = {{ properCase name }}Controller
+
+{{/if}}

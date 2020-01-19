@@ -26,6 +26,7 @@
     "egg-mock": "^3.25.1",
     "eslint": "^6.8.0",
     "eslint-config-egg": "^8.0.0",
+    "plop": "^2.5.3",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
