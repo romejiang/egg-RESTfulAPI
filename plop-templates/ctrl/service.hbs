@@ -58,7 +58,7 @@ class {{ properCase name }}Service extends Service {
     //   querys.reason = { $regex: height }
     // }
     if (id){
-      querys.user: id,
+      querys.user = id
     }
 
     const res = await this.ctx.model.{{ properCase name }}.find(querys).skip(skip).limit(pageSize).sort(sort).exec()

@@ -39,6 +39,24 @@ module.exports = {
       }
     },
     {
+      type: 'add',
+      path: `test/app/controller/${name}.test.js`,
+      templateFile: 'plop-templates/ctrl/test.controller.hbs',
+      skipIfExists: true,
+      data: {
+        name: name,
+      }
+    },
+    {
+      type: 'add',
+      path: `test/app/service/${name}.test.js`,
+      templateFile: 'plop-templates/ctrl/test.service.hbs',
+      skipIfExists: true,
+      data: {
+        name: name,
+      }
+    },
+    {
       type: 'modify',
       path: 'app/router.js',
       templateFile: 'plop-templates/ctrl/router.hbs',
