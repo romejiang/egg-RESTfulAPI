@@ -32,15 +32,17 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon",
+    "start": "egg-scripts start --daemon --ignore-stderr --sticky",
+    "st": "egg-scripts start --env=st --daemon --ignore-stderr --sticky",
     "stop": "egg-scripts stop",
-    "dev": "egg-bin dev",
+    "dev": "egg-bin dev --sticky --workers 2",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
+    "ctrl": "plop ctrl",
     "autod": "autod"
   },
   "ci": {
