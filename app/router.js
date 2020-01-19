@@ -18,18 +18,27 @@ module.exports = app => {
   router.resources('role', '/api/role', controller.role)
 
   // userAccess
-  router.post('/api/user/access/login', controller.userAccess.login)
-  router.get('/api/user/access/current', controller.userAccess.current)
-  router.get('/api/user/access/logout', controller.userAccess.logout)
-  router.put('/api/user/access/resetPsw', controller.userAccess.resetPsw)
+  // 常用的开放接口
+  router.post('/api/public/login', controller.userAccess.login)
+  router.get('/api/public/logout', controller.userAccess.logout)
+  // router.get('/api/public/dashboard', controller.userAccess.dashboard)
+  // router.post('/api/public/register', controller.user.create)
+  // router.get('/api/public/refresh', controller.userAccess.refresh)
+  // router.get('/api/public/captcha', controller.userAccess.captcha)
+  // router.get('/api/public/verify', controller.userAccess.verify)
+  // router.post('/api/public/sendsms', controller.userAccess.sendsms)
+  // router.post('/api/public/lastpassword', controller.userAccess.lastpassword)
+
+  router.get('/api/user/current', controller.userAccess.current)
+  router.put('/api/user/resetPsw', controller.userAccess.resetPsw)
 
   // user
   router.post('/api/user', controller.user.create)
   router.delete('/api/user/:id', controller.user.destroy)
   router.put('/api/user/:id', controller.user.update)
+
   router.get('/api/user/:id', controller.user.show)
   router.get('/api/user', controller.user.index)
-  router.delete('/api/user', controller.user.removes)
   router.resources('user', '/api/user', controller.user)
 
   // upload
@@ -42,6 +51,6 @@ module.exports = app => {
   router.put('/api/upload/:id/extra', controller.upload.extra)
   router.get('/api/upload/:id', controller.upload.show)
   router.get('/api/upload', controller.upload.index)
-  router.delete('/api/upload', controller.upload.removes)
+  // router.delete('/api/upload', controller.upload.removes)
   // router.resources('upload', '/api/upload', controller.upload)
 }

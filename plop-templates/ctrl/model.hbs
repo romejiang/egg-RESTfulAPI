@@ -9,5 +9,9 @@ module.exports = app => {
     createdAt: { type: Date, default: Date.now }
   })
 
+  {{ properCase name }}Schema.methods.toString = function () {
+    return this.name 
+  };
+
   return mongoose.model('{{ properCase name }}', {{ properCase name }}Schema)
 }

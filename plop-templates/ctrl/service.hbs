@@ -37,7 +37,7 @@ class {{ properCase name }}Service extends Service {
   }
 
   // index===============================================>
-  async index(payload) {
+  async index(payload, id = undefined) {
     let { currentPage, pageSize } = payload
 
     // 分页
@@ -57,6 +57,9 @@ class {{ properCase name }}Service extends Service {
     // if (height) {
     //   querys.reason = { $regex: height }
     // }
+    if (id){
+      querys.user: id,
+    }
 
     const res = await this.ctx.model.{{ properCase name }}.find(querys).skip(skip).limit(pageSize).sort(sort).exec()
     const count = await this.ctx.model.{{ properCase name }}.countDocuments(querys).exec()
