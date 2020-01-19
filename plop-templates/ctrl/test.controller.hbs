@@ -1,6 +1,7 @@
 'use strict'
 
 const { app, assert } = require('egg-mock/bootstrap')
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 describe('test/app/controller/{{ name }}.test.js', () => {
 
@@ -27,6 +28,7 @@ describe('test/app/controller/{{ name }}.test.js', () => {
     const body = res.body
     assert(body.code === 0);
     id = body.data._id
+    await wait(2 * 1000);
   })
 
   it('测试 {{ name }} 修改', async () => {

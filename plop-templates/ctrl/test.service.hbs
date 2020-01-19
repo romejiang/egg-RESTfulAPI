@@ -16,10 +16,11 @@ describe('test/app/service/{{ name }}.test.js', () => {
     assert({{ name }}.access === 'service');
     id = {{ name }}._id;
     // console.log({{ name }});
+    await wait(2 * 1000);
   });
 
   it('should get null when user not exists', async () => {
-    await wait(2 * 1000);
+    
 
     const ctx = app.mockContext();
     // console.log(id);
