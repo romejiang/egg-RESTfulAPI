@@ -24,9 +24,9 @@ module.exports = appInfo => {
     fileExtensions: ['.apk', '.pptx', '.docx', '.csv', '.doc', '.ppt', '.pdf', '.pages', '.wav', '.mov'], // 增加对 .apk 扩展名的支持
   },
 
-    config.bcrypt = {
-      saltRounds: 10 // default 10
-    }
+  config.bcrypt = {
+    saltRounds: 10 // default 10
+  }
 
   config.mongoose = {
     url: 'mongodb://127.0.0.1:27017/egg_x',
@@ -54,7 +54,7 @@ module.exports = appInfo => {
     httpOnly: true,
     encrypt: true,
     renew: true,
-  };
+  }
 
   return config
 }

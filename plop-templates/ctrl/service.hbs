@@ -77,7 +77,11 @@ class {{ properCase name }}Service extends Service {
 
   // removes===============================================>
   async removes(values) {
-    return this.ctx.model.{{ properCase name }}.remove({ _id: { $in: values } })
+    if (values.length > 0) {
+      return this.ctx.model.{{ properCase name }}.deleteMany({ _id: { $in: values } })
+    }else{
+      return this.ctx.model.{{ properCase name }}.deleteMany({})
+    }
   }
 
   // Commons===============================================>

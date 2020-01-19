@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // 系统消息监听代码
 module.exports = app => {
@@ -25,4 +25,4 @@ module.exports = app => {
   //     })
   //   });
   // });
-};
+}

@@ -10,32 +10,28 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: ['.k2pool.com'],
+    domainWhiteList: ['*'],
   }
 
   config.mongoose = {
-    url: 'mongodb://localhost:27017,localhost:27018,localhost:27019/egg?replicaSet=rs0',
+    url: 'mongodb://localhost:27017,localhost:27018,localhost:27019/eggtest?replicaSet=rs0',
     options: {
       // useMongoClient: true,
-      autoReconnect: true,
       useFindAndModify: false,
-      reconnectTries: Number.MAX_VALUE,
       bufferMaxEntries: 0,
       useCreateIndex: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      readPreference: 'secondaryPreferred',
+      useUnifiedTopology: true
     },
   }
 
   config.jwt = {
     secret: '945134717973276f16ff26222a89166ff98d0441',
-    enable: true, // default is false
+    enable: false, // default is false
     match: /^\/api\/((?!public).)*$/
   }
 
-
-  config.image = {
-    server: 'http://api.k2pool.com'
-  }
 
   return config
 }

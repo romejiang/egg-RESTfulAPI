@@ -90,8 +90,9 @@ class {{ properCase name }}Controller extends Controller {
     const { ctx, service } = this
     // 组装参数
     // const payload = ctx.queries.id
-    const { id } = ctx.request.body // {id: "5a452a44ab122b16a0231b42,5a452a3bab122b16a0231b41"}
-    const payload = id.split(',') || []
+    // {id: "5a452a44ab122b16a0231b42,5a452a3bab122b16a0231b41"}
+    const { id } = ctx.request.body 
+    const payload = id ? id.split(',') : []
     // 调用 Service 进行业务处理
     const result = await service.{{ name }}.removes(payload)
     // 设置响应内容和响应状态码

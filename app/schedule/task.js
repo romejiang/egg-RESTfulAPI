@@ -6,9 +6,9 @@ module.exports = app => {
       type: 'worker',
     },
     async task(ctx) {
-      console.log("************ crontab 定时统计 ..." + new Date());
+      console.log('************ crontab 定时统计 ...' + new Date())
 
     },
-  };
-};
+  }
+}
 

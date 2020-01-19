@@ -14,7 +14,7 @@ module.exports = appInfo => {
   }
 
   config.mongoose = {
-    url: `mongodb://localhost:27017,localhost:27018,localhost:27019,mongo3:27017,mongo4:27018/egg?replicaSet=rs0`,
+    url: 'mongodb://localhost:27017,localhost:27018,localhost:27019,mongo3:27017,mongo4:27018/egg?replicaSet=rs0',
     options: {
       // useMongoClient: true,
       readPreference: 'secondaryPreferred',

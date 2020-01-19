@@ -40,7 +40,7 @@ module.exports = {
     },
     {
       type: 'modify',
-      path: `app/router.js`,
+      path: 'app/router.js',
       templateFile: 'plop-templates/ctrl/router.hbs',
       pattern: /\/\/ insert/,
       data: {

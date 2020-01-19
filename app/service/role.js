@@ -73,7 +73,11 @@ class RoleService extends Service {
 
   // removes===============================================>
   async removes(values) {
-    return this.ctx.model.Role.remove({ _id: { $in: values } })
+    if (values.length > 0) {
+      return this.ctx.model.Role.deleteMany({ _id: { $in: values } })
+    }else{
+      return this.ctx.model.Role.deleteMany({})
+    }
   }
 
   // Commons===============================================>

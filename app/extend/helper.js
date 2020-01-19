@@ -1,5 +1,5 @@
 const moment = require('moment')
-const crypto = require('crypto');
+const crypto = require('crypto')
 
 // 格式化时间
 exports.formatTime = time => moment(time).format('YYYY-MM-DD HH:mm')
@@ -21,7 +21,7 @@ exports.success = ({ ctx, res = null, msg = '请求成功' }) => {
 exports.parseMsg = (action, payload = {}, metadata = {}) => {
   const meta = Object.assign({}, {
     timestamp: Date.now(),
-  }, metadata);
+  }, metadata)
 
   return {
     meta,
@@ -29,37 +29,37 @@ exports.parseMsg = (action, payload = {}, metadata = {}) => {
       action,
       payload,
     },
-  };
+  }
 }
 
 // 加密方法
 exports.encrypt = (data, key) => {
   // 注意，第二个参数是Buffer类型
-  return crypto.publicEncrypt(key, Buffer.from(data));
-};
+  return crypto.publicEncrypt(key, Buffer.from(data))
+}
 
 // 解密方法
 exports.decrypt = (encrypted, key) => {
   // 注意，encrypted是Buffer类型
-  return crypto.privateDecrypt(key, encrypted);
-};
+  return crypto.privateDecrypt(key, encrypted)
+}
 
 exports.isNumber = (val) => {
-  if (parseFloat(val).toString() == "NaN") {
-    return false;
+  if (parseFloat(val).toString() == 'NaN') {
+    return false
   } else {
-    return true;
+    return true
   }
 }
 
 exports.randomNum = (n = 4) => {
-  var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-  var res = "";
+  var res = ''
   for (var i = 0; i < n; i++) {
-    var id = Math.ceil(Math.random() * chars.length - 1);
-    res += chars[id];
+    var id = Math.ceil(Math.random() * chars.length - 1)
+    res += chars[id]
   }
-  return res;
+  return res
 }
 

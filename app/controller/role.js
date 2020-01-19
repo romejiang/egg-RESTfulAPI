@@ -21,9 +21,9 @@ class RoleController extends Controller {
     // 调用 Service 进行业务处理
     const res = await service.role.create(payload)
     // 设置响应内容和响应状态码
-    ctx.helper.success({ctx, res})
+    ctx.helper.success({ ctx, res })
   }
-  
+
   // 删除单个角色
   async destroy() {
     const { ctx, service } = this
@@ -32,7 +32,7 @@ class RoleController extends Controller {
     // 调用 Service 进行业务处理
     await service.role.destroy(id)
     // 设置响应内容和响应状态码
-    ctx.helper.success({ctx})
+    ctx.helper.success({ ctx })
   }
 
   // 修改角色
@@ -46,7 +46,7 @@ class RoleController extends Controller {
     // 调用 Service 进行业务处理
     await service.role.update(id, payload)
     // 设置响应内容和响应状态码
-    ctx.helper.success({ctx})
+    ctx.helper.success({ ctx })
   }
 
   // 获取单个角色
@@ -57,7 +57,7 @@ class RoleController extends Controller {
     // 调用 Service 进行业务处理
     const res = await service.role.show(id)
     // 设置响应内容和响应状态码
-    ctx.helper.success({ctx, res})
+    ctx.helper.success({ ctx, res })
   }
 
   // 获取所有角色(分页/模糊)
@@ -68,7 +68,7 @@ class RoleController extends Controller {
     // 调用 Service 进行业务处理
     const res = await service.role.index(payload)
     // 设置响应内容和响应状态码
-    ctx.helper.success({ctx, res})
+    ctx.helper.success({ ctx, res })
   }
 
   // 删除所选角色(条件id[])
@@ -77,11 +77,11 @@ class RoleController extends Controller {
     // 组装参数
     // const payload = ctx.queries.id
     const { id } = ctx.request.body // {id: "5a452a44ab122b16a0231b42,5a452a3bab122b16a0231b41"}
-    const payload = id.split(',') || []
+    const payload = id ? id.split(',') : []
     // 调用 Service 进行业务处理
     const result = await service.role.removes(payload)
     // 设置响应内容和响应状态码
-    ctx.helper.success({ctx})
+    ctx.helper.success({ ctx })
   }
 
 }
