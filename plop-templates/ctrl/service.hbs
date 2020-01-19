@@ -59,7 +59,7 @@ class {{ properCase name }}Service extends Service {
     // }
 
     const res = await this.ctx.model.{{ properCase name }}.find(querys).skip(skip).limit(pageSize).sort(sort).exec()
-    const count = await this.ctx.model.{{ properCase name }}.count(querys).exec()
+    const count = await this.ctx.model.{{ properCase name }}.countDocuments(querys).exec()
 
     // 整理数据源 -> Ant Design Pro
     const list = res.map((e, i) => {

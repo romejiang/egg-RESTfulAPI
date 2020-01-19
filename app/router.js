@@ -8,15 +8,6 @@ module.exports = app => {
 
   // insert
 
-  // =======  fly  =======
-  router.post('/api/fly', controller.fly.create)
-  router.put('/api/fly/:id', controller.fly.update)
-  router.get('/api/fly/:id', controller.fly.show)
-  router.get('/api/fly', controller.fly.index)
-  router.delete('/api/fly/:id', controller.fly.destroy)
-  // ===================================
-
-
   // role
   router.post('/api/role', controller.role.create)
   router.delete('/api/role/:id', controller.role.destroy)
