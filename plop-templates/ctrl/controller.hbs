@@ -1,4 +1,3 @@
-{{#if script}}
 
 const Controller = require('egg').Controller
 
@@ -10,7 +9,6 @@ class {{ properCase name }}Controller extends Controller {
       name: { type: 'string', required: true, allowEmpty: false },
       access: { type: 'string', required: true, allowEmpty: false }
     }
-
   }
 
   // 创建角色
@@ -85,10 +83,7 @@ class {{ properCase name }}Controller extends Controller {
     // 设置响应内容和响应状态码
     ctx.helper.success({ctx})
   }
-
 }
-
 
 module.exports = {{ properCase name }}Controller
 
-{{/if}}

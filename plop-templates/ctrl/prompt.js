@@ -5,26 +5,8 @@ module.exports = {
   prompts: [{
     type: 'input',
     name: 'name',
-    message: 'view name please',
+    message: 'model name please',
     validate: notEmpty('name')
-  },
-  {
-    type: 'checkbox',
-    name: 'blocks',
-    message: 'Blocks:',
-    choices: [
-      {
-        name: '<script>',
-        value: 'script',
-        checked: true
-      }
-    ],
-    validate(value) {
-      if (value.indexOf('script') === -1) {
-        return 'View require at least a <script> or <template> tag.'
-      }
-      return true
-    }
   }
   ],
   actions: data => {
@@ -36,7 +18,6 @@ module.exports = {
       skipIfExists: true,
       data: {
         name: name,
-        script: data.blocks.includes('script'),
       }
     },
     {
@@ -46,7 +27,6 @@ module.exports = {
       skipIfExists: true,
       data: {
         name: name,
-        script: data.blocks.includes('script'),
       }
     }, 
     {
@@ -56,7 +36,6 @@ module.exports = {
       skipIfExists: true,
       data: {
         name: name,
-        script: data.blocks.includes('script'),
       }
     },
     {
@@ -66,7 +45,6 @@ module.exports = {
       pattern: /\/\/ insert/,
       data: {
         name: name,
-        script: data.blocks.includes('script'),
       }
     }
     ]

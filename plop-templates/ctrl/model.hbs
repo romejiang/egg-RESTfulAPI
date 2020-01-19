@@ -1,4 +1,3 @@
-{{#if script}}
 
 module.exports = app => {
   const mongoose = app.mongoose
@@ -12,5 +11,3 @@ module.exports = app => {
 
   return mongoose.model('{{ properCase name }}', {{ properCase name }}Schema)
 }
-
-{{/if}}
