@@ -1,38 +1,39 @@
+
 const Service = require('egg').Service
 
-class RoleService extends Service {
+class FlyService extends Service {
   // create===============================================>
   async create(payload) {
-    return this.ctx.model.Role.create(payload)
+    return this.ctx.model.Fly.create(payload)
   }
 
   // destroy===============================================>  
   async destroy(_id) {
     const { ctx, service } = this
-    const role = await ctx.service.role.find(_id)
-    if (!role) {
-      ctx.throw(404, 'role not found')
+    const fly = await ctx.service.fly.find(_id)
+    if (!fly) {
+      ctx.throw(404, 'fly not found')
     }
-    return ctx.model.Role.findByIdAndRemove(_id)
+    return ctx.model.Fly.findByIdAndRemove(_id)
   }
 
   // update===============================================>
   async update(_id, payload) {
     const { ctx, service } = this
-    const role = await ctx.service.role.find(_id)
-    if (!role) {
-      ctx.throw(404, 'role not found')
+    const fly = await ctx.service.fly.find(_id)
+    if (!fly) {
+      ctx.throw(404, 'fly not found')
     }
-    return ctx.model.Role.findByIdAndUpdate(_id, payload)
+    return ctx.model.Fly.findByIdAndUpdate(_id, payload)
   }
 
   // show===============================================>
   async show(_id) {
-    const role = await this.ctx.service.role.find(_id)
-    if (!role) {
-      this.ctx.throw(404, 'role not found')
+    const fly = await this.ctx.service.fly.find(_id)
+    if (!fly) {
+      this.ctx.throw(404, 'fly not found')
     }
-    return this.ctx.model.Role.findById(_id)
+    return this.ctx.model.Fly.findById(_id)
   }
 
   // index===============================================>
@@ -57,8 +58,8 @@ class RoleService extends Service {
     //   querys.reason = { $regex: height }
     // }
 
-    const res = await this.ctx.model.Role.find(querys).skip(skip).limit(pageSize).sort(sort).exec()
-    const count = await this.ctx.model.Role.countDocuments(querys).exec()
+    const res = await this.ctx.model.Fly.find(querys).skip(skip).limit(pageSize).sort(sort).exec()
+    const count = await this.ctx.model.Fly.count(querys).exec()
 
     // 整理数据源 -> Ant Design Pro
     const list = res.map((e, i) => {
@@ -73,14 +74,15 @@ class RoleService extends Service {
 
   // removes===============================================>
   async removes(values) {
-    return this.ctx.model.Role.remove({ _id: { $in: values } })
+    return this.ctx.model.Fly.remove({ _id: { $in: values } })
   }
 
   // Commons===============================================>
   async find(id) {
-    return this.ctx.model.Role.findById(id)
+    return this.ctx.model.Fly.findById(id)
   }
 
 }
 
-module.exports = RoleService
+module.exports = FlyService
+

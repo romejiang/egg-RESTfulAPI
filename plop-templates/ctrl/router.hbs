@@ -1,0 +1,11 @@
+{{#if script}}
+  // insert
+
+  // =======  {{ name }}  =======
+  router.post('/api/{{ name }}', controller.{{ name }}.create)
+  router.put('/api/{{ name }}/:id', controller.{{ name }}.update)
+  router.get('/api/{{ name }}/:id', controller.{{ name }}.show)
+  router.get('/api/{{ name }}', controller.{{ name }}.index)
+  router.delete('/api/{{ name }}/:id', controller.{{ name }}.destroy)
+  // ===================================
+{{/if}}
