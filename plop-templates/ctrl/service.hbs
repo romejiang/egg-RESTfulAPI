@@ -38,7 +38,7 @@ class {{ properCase name }}Service extends Service {
 
   // index===============================================>
   async index(payload, id = undefined) {
-    let { currentPage, pageSize } = payload
+    let { currentPage, pageSize, search } = payload
 
     // 分页
     pageSize = Number(pageSize || 10)
@@ -54,9 +54,9 @@ class {{ properCase name }}Service extends Service {
 
     // 查询参数
     let querys = {}
-    // if (height) {
-    //   querys.reason = { $regex: height }
-    // }
+    if (search) {
+      querys.name = { $regex: search }
+    }
     if (id){
       querys.user = id
     }

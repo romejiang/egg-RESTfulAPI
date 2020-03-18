@@ -37,7 +37,7 @@ class RoleService extends Service {
 
   // index===============================================>
   async index(payload) {
-    let { currentPage, pageSize } = payload
+    let { currentPage, pageSize, search } = payload
 
     // 分页
     pageSize = Number(pageSize || 10)
@@ -53,9 +53,9 @@ class RoleService extends Service {
 
     // 查询参数
     let querys = {}
-    // if (height) {
-    //   querys.reason = { $regex: height }
-    // }
+    if (search) {
+      querys.name = { $regex: search }
+    }
 
     const res = await this.ctx.model.Role.find(querys).skip(skip).limit(pageSize).sort(sort).exec()
     const count = await this.ctx.model.Role.countDocuments(querys).exec()

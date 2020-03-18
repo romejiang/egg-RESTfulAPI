@@ -17,7 +17,12 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: ['http://localhost:8000'],
+    domainWhiteList: ['*'],
+  }
+
+  config.cors = {
+    credentials: true,
+    origin: ctx => ctx.get('origin'),
   }
 
   config.multipart = {
@@ -29,7 +34,7 @@ module.exports = appInfo => {
   }
 
   config.mongoose = {
-    url: 'mongodb://127.0.0.1:27017/egg_x',
+    url: 'mongodb://127.0.0.1:27017/aptitude',
     options: {
       useFindAndModify: false,
       bufferMaxEntries: 0,
@@ -42,11 +47,14 @@ module.exports = appInfo => {
 
   config.jwt = {
     secret: 'Great4-M',
-    enable: false,
+    enable: true,
     // match: '/jwt', // optional
     match: /^\/api\/((?!public).)*$/
   }
 
+  config.image = {
+    server: 'http://www.local.com:7001'
+  }
 
   config.session = {
     key: 'EGG_PROJECT_REST',

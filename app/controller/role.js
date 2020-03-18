@@ -5,7 +5,7 @@ class RoleController extends Controller {
     super(ctx)
 
     this.createRule = {
-      name: { type: 'string', required: true, allowEmpty: false },
+      name: { type: 'string', required: true, allowEmpty: false, min: 4 },
       access: { type: 'string', required: true, allowEmpty: false }
     }
 
