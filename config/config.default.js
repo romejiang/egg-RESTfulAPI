@@ -34,7 +34,7 @@ module.exports = appInfo => {
   }
 
   config.mongoose = {
-    url: 'mongodb://127.0.0.1:27017/aptitude',
+    url: 'mongodb://localhost:27017/test',
     options: {
       useFindAndModify: false,
       bufferMaxEntries: 0,

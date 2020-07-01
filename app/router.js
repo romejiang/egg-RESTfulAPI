@@ -5,6 +5,8 @@
 module.exports = app => {
   const { router, controller } = app
   router.get('/', controller.home.index)
+  router.get('/api/public/init', controller.home.init)
+  router.post('/api/public/echo', controller.home.echo)
 
   // insert
 
