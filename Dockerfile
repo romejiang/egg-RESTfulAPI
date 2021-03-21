@@ -12,7 +12,7 @@ WORKDIR /app
 COPY . /app/
 # 使用 npm 安装 app 所需要的所有依赖
 # RUN npm i
-RUN npm i --registry=https://registry.npm.taobao.org
+RUN npm i --unsafe-perm=true --allow-root --registry=https://registry.npm.taobao.org
 
 # 暴露端口。如果程序是一个服务器，会监听一个或多个端口，可以用 EXPOSE 来表示这个端口
 EXPOSE 7001
