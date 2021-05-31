@@ -1,5 +1,14 @@
-module.exports = appInfo => {
-  const config = exports = {}
+const path = require('path')
+const { I18n } = require('i18n')
+const i18n = new I18n({
+  // eslint-disable-next-line array-bracket-spacing
+  locales: ['en', 'cn'],
+  directory: path.join(__dirname, 'locales'),
+  defaultLocale: 'cn',
+})
+
+module.exports = (appInfo) => {
+  const config = (exports = {})
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1513779989145_1674'
@@ -22,26 +31,35 @@ module.exports = appInfo => {
 
   config.cors = {
     credentials: true,
-    origin: ctx => ctx.get('origin'),
+    origin: (ctx) => ctx.get('origin'),
   }
-
-  config.multipart = {
-    fileExtensions: ['.apk', '.pptx', '.docx', '.csv', '.doc', '.ppt', '.pdf', '.pages', '.wav', '.mov'], // 增加对 .apk 扩展名的支持
-  },
-
-  config.bcrypt = {
-    saltRounds: 10 // default 10
-  }
+  ;(config.multipart = {
+    fileExtensions: [
+      '.apk',
+      '.pptx',
+      '.docx',
+      '.csv',
+      '.doc',
+      '.ppt',
+      '.pdf',
+      '.pages',
+      '.wav',
+      '.mov',
+    ], // 增加对 .apk 扩展名的支持
+  }),
+  (config.bcrypt = {
+    saltRounds: 10, // default 10
+  })
 
   config.mongoose = {
-    url: 'mongodb://localhost:27017/test',
+    url: 'mongodb://localhost:27017/test1',
     options: {
       useFindAndModify: false,
       bufferMaxEntries: 0,
       useCreateIndex: true,
       useNewUrlParser: true,
       readPreference: 'secondaryPreferred',
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     },
   }
 
@@ -49,11 +67,11 @@ module.exports = appInfo => {
     secret: 'Great4-M',
     enable: true,
     // match: '/jwt', // optional
-    match: /^\/api\/((?!public).)*$/
+    match: /^\/api\/((?!public).)*$/,
   }
 
   config.image = {
-    server: 'http://www.local.com:7001'
+    server: 'http://www.local.com:7001',
   }
 
   config.session = {
@@ -62,6 +80,15 @@ module.exports = appInfo => {
     httpOnly: true,
     encrypt: true,
     renew: true,
+  }
+
+  config.validate = {
+    convert: true,
+    validateRoot: true,
+    translate: function () {
+      var args = Array.prototype.slice.call(arguments)
+      return i18n.__(args[0])
+    },
   }
 
   return config
