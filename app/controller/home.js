@@ -1,10 +1,20 @@
 const Controller = require('egg').Controller
+const path = require('path')
 
 class HomeController extends Controller {
   async index() {
-    this.ctx.body = `hi, egg-RESTfulAPI!
-    A optimized Node.js RESTful API Server Template based on egg.js.
-    https://github.com/icxcat/egg-RESTfulAPI.git`
+    const packageJson = require(path.resolve(this.config.baseDir, 'package.json'))
+    this.ctx.body = {
+      name: 'tempateTitle',
+      auther: `${packageJson.author}`,
+      version: `${packageJson.version}`,
+      node_env: process.env.NODE_ENV,
+      eggjs_env: this.app.config.env,
+      server_name: process.env.SERVER_NAME,
+      build_version: process.env.BUILD_VERSION,
+      node_version: process.versions.node,
+      // logger: this.app.config.logger.dir
+    }
   }
 
   async init() {
@@ -32,7 +42,7 @@ class HomeController extends Controller {
 
 
   async echo() {
-    const { ctx } = this;
+    const { ctx } = this
     // const _id = ctx.state.user && ctx.state.user.data._id // GET ID
     const post = ctx.request.body || {} // POST
     const get = ctx.query // GET
