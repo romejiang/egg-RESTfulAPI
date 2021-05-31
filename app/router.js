@@ -8,6 +8,9 @@ module.exports = app => {
   router.get('/api/public/init', controller.home.init)
   router.post('/api/public/echo', controller.home.echo)
 
+  router.get('/api/public/test', controller.test.index)
+  router.post('/api/public/test/echo', controller.test.echo)
+
   // insert
 
   // role
@@ -33,6 +36,16 @@ module.exports = app => {
 
   router.get('/api/user/current', controller.userAccess.current)
   router.put('/api/user/resetPsw', controller.userAccess.resetPsw)
+
+  // 微信支付
+  router.post('/api/pay/weixin', controller.weixin.ordersJSAPI)   // 微信下单
+  // 微信公众号相关的接口
+  router.get('/api/weixin/h5init', controller.weixin.init)        // 微信公众号，页面认证
+  router.get('/api/weixin/bind', controller.weixin.authBind)    // 微信和用户绑定
+  // router.get('/api/public/weixin/auth/mp', controller.weixin.authMP) // 微信登录接口，获取openid
+  router.get('/api/public/weixin/auth', controller.weixin.auth) // 微信登录接口，获取openid
+  router.post('/api/public/callback/weixin', controller.weixin.payCallback)   // 微信回调
+  // router.get('/api/public/callback/alipay', controller.crazy.weixinCallback)   // 
 
   // user
   router.post('/api/user', controller.user.create)
